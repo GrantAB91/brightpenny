@@ -1,0 +1,808 @@
+/* =========================================================
+   Bright Penny — theme.css
+   Design system on top of Bootstrap 5.3.
+   Contents:
+     1. Fonts
+     2. Tokens
+     3. Base + typography
+     4. The frame (ledger rules) + section rhythm
+     5. Buttons, links, forms
+     6. Header + offcanvas nav
+     7. Components (eyebrow, index list, steps, chips, media)
+     8. Footer + cookie banner
+     9. Utilities, motion, print
+   ========================================================= */
+
+/* ---------- 1. Fonts (self-hosted, Fontshare) ---------- */
+@font-face {
+  font-family: "Switzer";
+  src: url("../fonts/switzer-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Switzer";
+  src: url("../fonts/switzer-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../fonts/cabinet-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../fonts/cabinet-grotesk-800.woff2") format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+/* Metric-matched fallbacks (computed from the real font files vs Arial)
+   so the swap causes no layout shift. */
+@font-face {
+  font-family: "Switzer-fb";
+  src: local("Arial");
+  font-weight: 400;
+  size-adjust: 99.79%;
+  ascent-override: 98.21%;
+  descent-override: 25.05%;
+  line-gap-override: 9.02%;
+}
+@font-face {
+  font-family: "Switzer-fb";
+  src: local("Arial");
+  font-weight: 600;
+  size-adjust: 102%;
+  ascent-override: 96.08%;
+  descent-override: 24.51%;
+  line-gap-override: 8.82%;
+}
+@font-face {
+  font-family: "Cabinet-fb";
+  src: local("Arial Bold"), local("Arial");
+  font-weight: 700;
+  size-adjust: 98.27%;
+  ascent-override: 88.53%;
+  descent-override: 28.49%;
+  line-gap-override: 9.16%;
+}
+@font-face {
+  font-family: "Cabinet-fb";
+  src: local("Arial Bold"), local("Arial");
+  font-weight: 800;
+  size-adjust: 100.28%;
+  ascent-override: 86.76%;
+  descent-override: 27.92%;
+  line-gap-override: 8.98%;
+}
+
+/* ---------- 2. Tokens ---------- */
+:root {
+  /* colour */
+  --ink: #0e2038;        /* near-black navy: text */
+  --navy: #0b1b33;       /* dark bands, footer */
+  --navy-2: #14294a;     /* raised surfaces on navy */
+  --penny: #f7931e;      /* brand accent — decorative on light, text-safe on navy */
+  --penny-deep: #a64d07; /* text-safe warm amber on light backgrounds (5.1:1 even on --wash) */
+  --penny-soft: #fdf0dd; /* pale wash for highlights */
+  --paper: #fcfbf8;      /* page background */
+  --wash: #f4f2ec;       /* alternate light band */
+  --line: #e4e0d6;       /* hairlines on light */
+  --line-dark: rgba(247, 147, 30, 0.16); /* hairlines on navy */
+  --muted: #5a6272;      /* secondary text on light (7:1) */
+  --muted-dark: #b9c2d3; /* secondary text on navy */
+
+  /* type */
+  --font-display: "Cabinet Grotesk", "Cabinet-fb", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Switzer", "Switzer-fb", "Helvetica Neue", Arial, sans-serif;
+  --fs-hero: clamp(2.7rem, 1.35rem + 5.1vw, 4.8rem);
+  --fs-h2: clamp(1.9rem, 1.15rem + 2.9vw, 3.05rem);
+  --fs-h3: clamp(1.3rem, 1.13rem + 0.7vw, 1.6rem);
+  --fs-lede: clamp(1.11rem, 1.03rem + 0.45vw, 1.35rem);
+  --fs-small: 0.9rem;
+
+  /* rhythm — three deliberate tiers, never uniform */
+  --band-tight: clamp(2.75rem, 1.9rem + 3.4vw, 4.5rem);
+  --band: clamp(4.25rem, 2.9rem + 5.4vw, 7rem);
+  --band-statement: clamp(5.5rem, 3.4rem + 8.5vw, 10rem);
+
+  /* radii — by role, not global */
+  --r-pill: 999px;
+  --r-field: 8px;
+
+  --frame-max: 1320px;
+  --header-h: 72px;
+
+  /* bootstrap remaps */
+  --bs-body-font-family: var(--font-body);
+  --bs-body-font-size: 1.0625rem;
+  --bs-body-line-height: 1.6;
+  --bs-body-color: var(--ink);
+  --bs-body-bg: var(--paper);
+  --bs-link-color-rgb: 180, 83, 9;
+  --bs-link-hover-color-rgb: 14, 32, 56;
+  --bs-border-radius: 0;
+}
+
+/* ---------- 3. Base + typography ---------- */
+::selection { background: rgba(247, 147, 30, 0.28); }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .display-hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.display-hero {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.028em;
+  margin: 0;
+}
+.display-sub { font-size: var(--fs-h2); } /* page-title size for inner pages */
+.display-h3 { font-size: var(--fs-h3); }
+h2, .h2 { font-size: var(--fs-h2); line-height: 1.08; letter-spacing: -0.022em; }
+h3, .h3 { font-size: var(--fs-h3); line-height: 1.2; letter-spacing: -0.012em; }
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: 1.55;
+  color: var(--muted);
+}
+.measure { max-width: 36em; }
+.measure-narrow { max-width: 27em; }
+.small, small { font-size: var(--fs-small); }
+strong { font-weight: 600; }
+
+[id] { scroll-margin-top: calc(var(--header-h) + 24px); }
+
+/* ---------- 4. The frame + section rhythm ----------
+   Two continuous vertical hairlines run the full page height —
+   the ledger. Sections sit inside; bands recolour their own lines. */
+.frame {
+  max-width: var(--frame-max);
+  margin-inline: auto;
+  border-inline: 1px solid var(--line);
+  overflow: clip;
+}
+@media (max-width: 575.98px) {
+  .frame { border-inline: 0; } /* rules read as clutter on small phones */
+}
+.band { padding-block: var(--band); }
+.band-tight { padding-block: var(--band-tight); }
+.band-statement { padding-block: var(--band-statement); }
+.band-rule { border-top: 1px solid var(--line); }
+
+.band-dark {
+  background: var(--navy);
+  color: var(--muted-dark);
+  --line: var(--line-dark);
+}
+.band-dark h2, .band-dark h3, .band-dark .h2 { color: #fff; }
+.band-dark .lede { color: var(--muted-dark); }
+.band-wash { background: var(--wash); }
+
+/* barely-there graph paper on navy */
+.texture-grid {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0.8px, transparent 0.8px);
+  background-size: 22px 22px;
+}
+
+.gutter { padding-inline: clamp(1.1rem, 4vw, 3.5rem); }
+
+/* ---------- 5. Buttons, links, forms ---------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  border-width: 1.5px;
+  padding: 0.85rem 2.1rem;
+  border-radius: var(--r-pill);
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+.btn-sm { padding: 0.58rem 1.5rem; font-size: 0.92rem; }
+
+/* primary: penny fill, ink text (white-on-orange fails contrast).
+   Hover flips to navy — a decisive change rather than a barely-there tint. */
+.btn-penny {
+  background: var(--penny);
+  border-color: var(--penny);
+  color: #16233c;
+}
+/* Deeper orange, dark text kept. A navy flip made the button vanish against
+   the navy hero; this stays legible on any background and holds 5:1. */
+.btn-penny:hover, .btn-penny:focus-visible {
+  background: #d97b06;
+  border-color: #d97b06;
+  color: #16233c;
+}
+/* quiet secondary: hairline, fills on hover */
+.btn-ghost {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: transparent;
+}
+.btn-ghost:hover, .btn-ghost:focus-visible { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.band-dark .btn-ghost { border-color: #fff; color: #fff; }
+.band-dark .btn-ghost:hover, .band-dark .btn-ghost:focus-visible { background: #fff; color: var(--navy); border-color: #fff; }
+
+a { text-underline-offset: 0.16em; }
+a:focus-visible, .btn:focus-visible, button:focus-visible {
+  outline: 3px solid var(--penny);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+.link-quiet { color: var(--ink); text-decoration-color: var(--penny); text-decoration-thickness: 2px; }
+.link-quiet:hover { color: var(--penny-deep); }
+
+.form-label { font-weight: 600; margin-bottom: 0.3rem; }
+/* Fields use the same square 1px hairline as the rest of the page — no
+   rounded corners, no heavier borders. */
+.form-control, .form-select {
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background-color: #fff;
+  padding: 0.75rem 0.9rem;
+  color: var(--ink);
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+.form-check-input { border: 1px solid var(--muted); border-radius: 0; width: 1.15em; height: 1.15em; }
+.form-check-input:checked { background-color: var(--penny-deep); border-color: var(--penny-deep); }
+.form-check-input:focus { border-color: var(--ink); box-shadow: 0 0 0 0.25rem rgba(247, 147, 30, 0.25); }
+.form-text { color: var(--muted); }
+
+/* ---------- 6. Header + offcanvas nav ---------- */
+.site-header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  min-height: var(--header-h);
+}
+/* The header sits inside the same ruled column as the page body, so the
+   vertical hairlines run unbroken from the logo down through the content and
+   the logo lines up with the copy beneath it. */
+.header-inner {
+  min-height: var(--header-h);
+  max-width: var(--frame-max);
+  margin-inline: auto;
+  border-inline: 1px solid var(--line);
+}
+@media (max-width: 575.98px) { .header-inner { border-inline: 0; } }
+.footer-inner { max-width: var(--frame-max); margin-inline: auto; }
+/* kill the SVG's optical left bearing so the mark aligns to the text below */
+.site-header .navbar-brand { display: block; margin-left: -2px; }
+.site-header .navbar-brand img { height: 40px; width: auto; display: block; }
+/* :not(.btn) matters — this selector out-specifies .btn-sm and was crushing
+   the padding on the nav's "Make an enquiry" button. */
+.site-nav a:not(.btn) {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.4rem 0.1rem;
+  border-bottom: 2px solid transparent;
+}
+.site-nav a:not(.btn):hover { color: var(--penny-deep); }
+.site-nav a:not(.btn)[aria-current="page"] { border-bottom-color: var(--penny); }
+.nav-toggle {
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.5rem 0.65rem;
+  line-height: 0;
+  color: var(--ink);
+}
+.nav-toggle:hover { background: var(--ink); color: var(--paper); }
+
+.offcanvas.bp-menu {
+  background: var(--navy);
+  color: #fff;
+  width: min(86vw, 360px);
+}
+.bp-menu .offcanvas-header { border-bottom: 1px solid var(--line-dark); padding: 1.1rem 1.5rem; }
+.bp-menu .btn-close {
+  filter: invert(1) grayscale(1) brightness(2);
+  opacity: 0.9;
+}
+.bp-menu nav { display: grid; gap: 0.25rem; padding: 1.25rem 1.5rem; }
+.bp-menu nav a {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  letter-spacing: -0.015em;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+.bp-menu nav a:hover { color: var(--penny); }
+.bp-menu nav a[aria-current="page"] { color: var(--penny); }
+.bp-menu .menu-cta { margin: 1.25rem 1.5rem 0; }
+.bp-menu .menu-foot { padding: 1.5rem; color: var(--muted-dark); font-size: var(--fs-small); }
+
+/* ---------- 7. Components ---------- */
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--penny-deep);
+  margin-bottom: 1rem;
+}
+.band-dark .eyebrow { color: var(--penny); }
+
+.numeral {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--penny-deep);
+  font-variant-numeric: tabular-nums;
+}
+.band-dark .numeral { color: var(--penny); }
+
+/* finance index — numbered ledger rows, not cards */
+.index-list { border-top: 1px solid var(--line); }
+.index-row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1.05rem 0.25rem;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: background-color 0.16s ease;
+}
+.index-row .numeral { font-size: 0.95rem; }
+.index-row .index-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1.05rem + 0.8vw, 1.6rem);
+  letter-spacing: -0.012em;
+}
+.index-row .index-blurb { color: var(--muted); font-size: 0.95rem; max-width: 34ch; text-align: right; }
+.index-row .index-arrow { color: var(--penny-deep); transition: transform 0.18s ease; font-size: 1.2rem; }
+.index-row:hover { background: var(--wash); }
+.index-row:hover .index-name { color: var(--penny-deep); }
+.index-row:hover .index-arrow { transform: translateX(5px); }
+@media (max-width: 767.98px) {
+  .index-row { grid-template-columns: 2.4rem 1fr auto; }
+  .index-row .index-blurb { display: none; } /* keep rows scannable on phones */
+}
+
+/* steps — ledger columns with a rule on the left */
+.step-col {
+  border-left: 1px solid var(--line);
+  padding: 0.4rem 0 0.4rem 1.4rem;
+}
+.step-col .numeral { font-size: 2.4rem; line-height: 1; display: block; margin-bottom: 0.9rem; }
+
+/* jump nav (finance options page) */
+.jump-side { position: sticky; top: calc(var(--header-h) + 20px); }
+.jump-side a {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  padding: 0.42rem 0;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--line);
+}
+.jump-side a:hover { color: var(--penny-deep); }
+.jump-side .numeral { font-size: 0.78rem; }
+
+.chipbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  white-space: nowrap;
+  padding: 0.55rem clamp(1.1rem, 4vw, 3.5rem);
+}
+.chipbar::-webkit-scrollbar { display: none; }
+.chipbar a {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 0.32rem 0.85rem;
+  margin-right: 0.45rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+.chipbar a:hover { border-color: var(--penny-deep); color: var(--penny-deep); }
+
+/* product sections on finance page */
+.product { border-top: 1px solid var(--line); padding-block: clamp(2.2rem, 1.5rem + 2.8vw, 4rem); }
+.product-first { border-top: 0; }
+.product .numeral { font-size: 1rem; display: block; margin-bottom: 0.7rem; }
+.tagrow { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 1.1rem; }
+.tagrow span {
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  padding: 0.22rem 0.7rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+/* media blocks */
+.media-cover { position: relative; overflow: hidden; }
+.hero-media { height: 100%; min-height: clamp(340px, 34vw, 560px); }
+@media (max-width: 991.98px) { .hero-media { min-height: 0; height: auto; } }
+
+/* ---------- typographic hero ----------
+   No stock photography or video: the type, the rules and the space carry it.
+   Imagery on this site earns its place by showing what the finance buys. */
+.hero-type {
+  background: var(--navy);
+  color: #fff;
+  padding-block: clamp(3.5rem, 2.2rem + 5.5vw, 7rem);
+  position: relative;
+  overflow: hidden;
+}
+.hero-type h1 { color: #fff; }
+.hero-type .lede { color: rgba(255, 255, 255, 0.86); }
+.hero-type .eyebrow { color: var(--penny); }
+.hero-type .small { color: rgba(255, 255, 255, 0.72); }
+.hero-type .btn-ghost { border-color: #fff; color: #fff; }
+.hero-type .btn-ghost:hover,
+.hero-type .btn-ghost:focus-visible { background: #fff; color: var(--navy); border-color: #fff; }
+/* a single penny rule as the only ornament */
+.hero-type__rule {
+  width: 4.5rem;
+  height: 3px;
+  background: var(--penny);
+  border: 0;
+  opacity: 1;
+  margin: 0 0 clamp(1.5rem, 1.1rem + 1.4vw, 2.25rem);
+}
+/* the nine finance types, set small under the hero copy */
+.hero-type__index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.92rem;
+  max-width: 58rem;
+}
+/* spacing alone separates the items — no marks to orphan at a line break */
+.hero-type__index { gap: 0.55rem 2.25rem; }
+
+/* ---------- asset-led hero ----------
+   Mobile: the photograph comes first, copy below on navy — the page never
+   opens as a block of text. Desktop: photo fills the band, copy sits over a
+   navy scrim on the left where the image is quietest. */
+.hero-asset { background: var(--navy); color: #fff; position: relative; }
+.hero-asset__media { display: block; }
+.hero-asset__media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-asset__body { padding-block: clamp(2.25rem, 1.6rem + 2.6vw, 3.5rem); position: relative; }
+.hero-asset h1 { color: #fff; }
+.hero-asset .lede { color: rgba(255, 255, 255, 0.86); }
+.hero-asset .eyebrow { color: var(--penny); }
+.hero-asset .small { color: rgba(255, 255, 255, 0.72); }
+.hero-asset .btn-ghost { border-color: #fff; color: #fff; }
+.hero-asset .btn-ghost:hover,
+.hero-asset .btn-ghost:focus-visible { background: #fff; color: var(--navy); border-color: #fff; }
+.hero-asset__rule { width: 4.5rem; height: 3px; background: var(--penny); border: 0; opacity: 1; margin: 0 0 1.5rem; }
+
+@media (min-width: 992px) {
+  .hero-asset { display: grid; min-height: clamp(520px, 66vh, 700px); }
+  .hero-asset__media,
+  .hero-asset__body { grid-area: 1 / 1; }
+  .hero-asset__media { height: 100%; }
+  .hero-asset__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+      rgba(11, 27, 51, 0.95) 0%,
+      rgba(11, 27, 51, 0.88) 30%,
+      rgba(11, 27, 51, 0.42) 50%,
+      rgba(11, 27, 51, 0.12) 70%,
+      rgba(11, 27, 51, 0.06) 100%);
+  }
+  .hero-asset__body { align-self: center; max-width: 55%; padding-block: clamp(3rem, 2rem + 3vw, 4.5rem); }
+}
+
+/* full-bleed image band */
+.image-band { position: relative; overflow: hidden; }
+.image-band img { width: 100%; display: block; object-fit: cover; }
+.image-band__caption {
+  padding: 0.85rem 0 0;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+/* ---------- hero with video (unused — kept for reference) ---------- */
+.hero-film {
+  position: relative;
+  isolation: isolate;
+  min-height: clamp(520px, 76vh, 760px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--navy);
+}
+.hero-film__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero-film__media video,
+.hero-film__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* navy scrim: heavier at the bottom where the copy sits */
+.hero-film__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(11, 27, 51, 0.62) 0%, rgba(11, 27, 51, 0.5) 30%, rgba(11, 27, 51, 0.88) 78%, rgba(11, 27, 51, 0.94) 100%);
+}
+.hero-film__body {
+  position: relative;
+  width: 100%;
+  padding-block: clamp(2.5rem, 1.6rem + 3.5vw, 4.5rem);
+  color: #fff;
+}
+.hero-film .display-hero,
+.hero-film h1 { color: #fff; }
+.hero-film .lede { color: rgba(255, 255, 255, 0.88); }
+.hero-film .eyebrow { color: var(--penny); }
+.hero-film .small { color: rgba(255, 255, 255, 0.75); }
+/* reversed ghost button, same as on navy bands */
+.hero-film .btn-ghost { border-color: rgba(255, 255, 255, 0.65); color: #fff; }
+.hero-film .btn-ghost:hover,
+.hero-film .btn-ghost:focus-visible { background: #fff; color: var(--navy); border-color: #fff; }
+
+/* WCAG 2.2.2 wants a way to stop auto-playing motion, but the control has no
+   place in the visual design. It is hidden until keyboard-focused, so it costs
+   nothing visually and is still operable. */
+.hero-film__toggle {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 3;
+  background: var(--navy);
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: var(--r-pill);
+  padding: 0.5rem 1.1rem;
+  font: 600 0.8rem/1.4 var(--font-body);
+  cursor: pointer;
+}
+.hero-film__toggle:focus-visible {
+  left: clamp(1.1rem, 4vw, 3.5rem);
+  top: 1.1rem;
+}
+/* The poster fills the hero until (and unless) main.js injects the video.
+   Two-class selectors so these out-specify `.hero-film__media video` above. */
+.hero-film__media .hero-film__still { display: block; height: 100%; }
+.hero-film__media.has-video .hero-film__still { display: none; }
+.hero-film__media .hero-film__video { display: block; }
+
+/* ---------- alternating image/text rows (finance products) ---------- */
+.media-row { display: grid; gap: clamp(1.25rem, 0.8rem + 2vw, 2.75rem); align-items: center; }
+@media (min-width: 768px) {
+  .media-row { grid-template-columns: 1fr 1fr; }
+  .media-row--flip .media-row__fig { order: 2; }
+}
+.media-row__fig { margin: 0; overflow: hidden; }
+.media-row__fig img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.media-caption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: rgba(11, 27, 51, 0.82);
+  color: #fff;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.9rem;
+}
+
+/* aspect + border helpers */
+.ar-21-9 { aspect-ratio: 21 / 9; }
+.ar-16-8 { aspect-ratio: 16 / 8; }
+.ar-16-7 { aspect-ratio: 16 / 7; }
+.tile-tall { min-height: 420px; }
+.line-border { border: 1px solid var(--line); }
+.step-penny { border-left-color: var(--penny); }
+.step-penny .numeral { font-size: 1rem; }
+.hr-line { border-color: var(--line); opacity: 1; }
+.link-light { color: #fff; text-decoration: underline; }
+.flow-node-accent { border-color: var(--penny); border-width: 2px; }
+
+/* sector tiles — editorial, hairline-separated, no card chrome */
+.sector-tile { position: relative; display: block; overflow: hidden; }
+.sector-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+.sector-tile:hover img { transform: scale(1.025); }
+.sector-tile .sector-label {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.2rem 1.1rem 0.9rem;
+  background: linear-gradient(180deg, rgba(11, 27, 51, 0) 0%, rgba(11, 27, 51, 0.78) 62%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+/* ---------- flow / steps: one continuous rule, numerals on the line ----------
+   Used for the About introducer diagram and the Contact "what happens next".
+   No boxes: a single vertical hairline with markers sitting on it. */
+.flow {
+  position: relative;
+  margin: 0;
+  padding-left: 2.75rem;
+}
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  width: 1px;
+  background: var(--line);
+}
+.flow-step { position: relative; padding-block: 0 clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem); }
+.flow-step:last-child { padding-bottom: 0; }
+.flow-step::before {
+  content: "";
+  position: absolute;
+  left: -2.4rem;
+  top: 0.45rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--paper);
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+/* the final party is the one that actually arranges the money — mark it */
+.flow-step--end::before { background: var(--penny); border-color: var(--penny); }
+.flow-step .who {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+}
+.flow-step .what { display: block; color: var(--muted); font-size: 0.97rem; margin-top: 0.2rem; }
+.flow-step .aside {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--penny-deep);
+}
+.band-dark .flow::before { background: var(--line-dark); }
+.band-dark .flow-step::before { background: var(--navy); border-color: var(--muted-dark); }
+.band-dark .flow-step .what { color: var(--muted-dark); }
+
+/* Numbered variant (Contact). The rule has to clear the numerals — at the
+   default 0.6rem it ran straight through them. */
+.flow--numbered { padding-left: 3.9rem; }
+.flow--numbered::before { left: 2.6rem; }
+.flow--numbered .flow-step::before { display: none; }
+.flow-step .step-num {
+  position: absolute;
+  left: -3.9rem;
+  top: 0.05rem;
+  width: 1.9rem;
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--penny-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+/* do / don't lists */
+.dolist { list-style: none; padding: 0; margin: 0; }
+.dolist li { padding: 0.65rem 0 0.65rem 1.9rem; border-bottom: 1px solid var(--line); position: relative; }
+.dolist li::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 1.05rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+}
+.dolist.do li::before { background: var(--penny); }
+.dolist.dont li::before { border: 1.5px solid var(--muted); }
+
+/* ---------- 8. Footer + cookie banner ---------- */
+.site-footer { background: var(--navy); color: var(--muted-dark); }
+.site-footer a { color: #fff; text-decoration: none; }
+.site-footer a:hover { color: var(--penny); }
+.site-footer .foot-logo img { height: 44px; width: auto; }
+.site-footer .foot-head {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+.site-footer .foot-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; }
+.disclosure-box {
+  border: 1px dashed rgba(247, 147, 30, 0.45);
+  padding: 1rem 1.2rem;
+  font-size: 0.86rem;
+}
+.disclosure-warn { border-color: var(--penny-deep); color: var(--penny-deep); }
+.foot-bottom { border-top: 1px solid var(--line-dark); font-size: 0.85rem; }
+.foot-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #fff;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+.foot-btn:hover { color: var(--penny); }
+
+.cookie-banner {
+  position: fixed;
+  inset: auto 1rem 1rem 1rem;
+  z-index: 1080;
+  max-width: 420px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--r-field);
+  box-shadow: 0 10px 30px rgba(14, 32, 56, 0.14);
+  padding: 1.1rem 1.2rem;
+}
+@media (min-width: 576px) { .cookie-banner { inset: auto auto 1.25rem 1.25rem; } }
+.cookie-banner p { font-size: 0.9rem; margin-bottom: 0.8rem; }
+
+/* ---------- 9. Utilities, motion, print ---------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 2000;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+}
+.skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+.text-muted-2 { color: var(--muted); }
+.img-tint { position: relative; }
+.img-tint::after { content: ""; position: absolute; inset: 0; background: rgba(11, 27, 51, 0.08); pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto !important; }
+}
+html { scroll-behavior: smooth; }
+
+@media print {
+  .site-header, .site-footer, .cookie-banner, .chipbar { display: none; }
+}
