@@ -1,0 +1,19 @@
+# tooling
+tools/node_modules/
+tools/package-lock.json
+tools/*.html
+tools/pexels-test.html
+
+# working image/video sources and throwaway candidates
+src-images/candidates/
+src-images/cand2/
+src-images/hero/
+src-images/vidposters/
+src-images/vidposters2/
+src-images/video/
+src-images/originals/*.png
+
+# lighthouse output
+reports/
+
+.DS_Store

@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "brightpenny-root",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8000", "--directory", "/Users/grant/BrightPenny"],
+      "port": 8000
+    },
+    {
+      "name": "brightpenny-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "serve", "-l", "8010", "/Users/grant/BrightPenny/site"],
+      "port": 8010
+    }
+  ]
+}
