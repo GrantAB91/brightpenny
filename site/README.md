@@ -67,7 +67,7 @@ Search the whole folder for `[` to find them all. In short:
 
 1. Domain: replace `https://brightpenny.co.uk` in every canonical/og:url, `sitemap.xml`,
    `robots.txt` and the JSON-LD block on the home page.
-2. Enquiry inbox: replace `enquiries@brightpenny.co.uk` (footer, contact page, privacy, JSON-LD).
+2. Enquiry inbox: replace `hello@brightpenny.co.uk` (footer, contact page, privacy, JSON-LD).
 3. Footer disclosure box: regulatory/permissions wording to be confirmed before launch.
 4. Company legal name + number in the footer bottom line.
 5. Privacy policy: full text + legal review, then remove its
