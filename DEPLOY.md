@@ -1,7 +1,8 @@
 # Bright Penny — hosting and domain
 
-**Live now:** https://bp-ads-manager.web.app
-**Target:** https://brightpenny.co.uk (with www redirecting to it)
+**LIVE:** https://brightpenny.co.uk — SSL active (Google Trust Services, expires 12 Nov 2026),
+www 301-redirects to the apex, HTTP 301-redirects to HTTPS. Microsoft 365 email verified
+unaffected. Also reachable at https://bp-ads-manager.web.app.
 
 Hosted on **Firebase Hosting** inside the existing GCP project **bp-ads-manager**
 (project number 694884790279, region europe-west2). Free tier, managed SSL, global CDN.
@@ -172,13 +173,25 @@ their include to it or the mail will be rejected. Microsoft 365 needs no SPF cha
 4. **Privacy page is `noindex`** until the policy is finalised; remove that meta tag and
    add the page to `sitemap.xml` when it's signed off.
 
-### One DNS record still to fix
+### If a page ever 404s after a DNS or domain change
 
-The `www` CNAME did not import — it still points at the apex instead of Firebase. Edit
-that single record in GoDaddy:
+Firebase's CDN caches responses per-path. When the domain was first mapped, the edge had
+cached a "Site Not Found" for `/` and kept serving it even though every other path worked.
+The fix is simply to redeploy, which busts the cache:
 
-| Type | Name | Value |
-|---|---|---|
-| CNAME | `www` | `bp-ads-manager.web.app` |
+```bash
+firebase deploy --only hosting --project bp-ads-manager
+```
 
-The apex (`brightpenny.co.uk`) imported correctly and is already serving.
+### Note on Firebase custom domain provisioning
+
+If a custom domain ever sticks on `HOST_MISMATCH` while DNS is demonstrably correct,
+Firebase's DNS checker has cached a stale result. Deleting and recreating the domain does
+not clear it. What does is forcing a re-evaluation by switching the certificate preference:
+
+```bash
+TOKEN=$(gcloud auth print-access-token)
+curl -X PATCH "https://firebasehosting.googleapis.com/v1beta1/projects/bp-ads-manager/sites/bp-ads-manager/customDomains/brightpenny.co.uk?updateMask=certPreference" \
+  -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" \
+  -H "x-goog-user-project: bp-ads-manager" -d '{"certPreference":"DEDICATED"}'
+```
