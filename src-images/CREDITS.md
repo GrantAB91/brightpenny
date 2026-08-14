@@ -16,6 +16,13 @@ mistakes don't get repeated.
 |---|---|---|---|
 | `hero-a1.mp4` + `hero-a1-poster*` | pexels.com/video/a1-motorway-27130669/ | (Pexels contributor) | **UK-verified:** the A1 at Aberford, Yorkshire. Lorries and vans moving through green fields and hedgerows. Trimmed to 14s, 1280×720, muted, ~1MB. |
 
+## Hero image (client supplied)
+
+`hero-split` — a composite showing the same panel van worn out on one side and in new
+condition on the other. Supplied by the client (generated image, not a photograph), so it
+carries no photographer credit and no stock licence. Source: `src-images/originals/hero-van-split.webp`.
+Note it is the one non-photographic image on the site; everything below is real photography.
+
 ## Photography
 
 | Site asset | Pexels photo | Photographer | Why it passed |
