@@ -510,12 +510,14 @@ a:focus-visible, .btn:focus-visible, button:focus-visible {
     content: "";
     position: absolute;
     inset: 0;
+    /* Falls away quickly past the copy so the subject on the right stays clear.
+       The hero image carries a before/after that a broad scrim would flatten. */
     background: linear-gradient(90deg,
       rgba(11, 27, 51, 0.95) 0%,
-      rgba(11, 27, 51, 0.88) 30%,
-      rgba(11, 27, 51, 0.42) 50%,
-      rgba(11, 27, 51, 0.12) 70%,
-      rgba(11, 27, 51, 0.06) 100%);
+      rgba(11, 27, 51, 0.9) 36%,
+      rgba(11, 27, 51, 0.6) 47%,
+      rgba(11, 27, 51, 0.1) 60%,
+      rgba(11, 27, 51, 0) 72%);
   }
   .hero-asset__body { align-self: center; max-width: 55%; padding-block: clamp(3rem, 2rem + 3vw, 4.5rem); }
 }
