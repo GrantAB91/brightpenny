@@ -1,4 +1,14 @@
 {
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "runtime": "nodejs22"
+    }
+  ],
   "hosting": {
     "public": "site",
     "cleanUrls": true,
@@ -9,6 +19,15 @@
       "**/node_modules/**",
       "**/netlify.toml",
       "**/README.md"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "function": {
+          "functionId": "enquiry",
+          "region": "europe-west2"
+        }
+      }
     ],
     "headers": [
       {

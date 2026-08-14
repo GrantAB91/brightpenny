@@ -86,10 +86,11 @@
             <h1 class="display-hero display-sub" id="page-heading">Tell us what you're funding.</h1>
             <p class="lede measure mt-3 mb-4">A few details are enough to get started. Rough figures are fine.</p>
 
-            <!-- Netlify form. After deploy: enable form detection in the Netlify
-                 dashboard, redeploy, then add an email notification to the enquiry inbox. -->
-            <form name="enquiry" method="POST" action="../thank-you/" data-netlify="true" netlify-honeypot="bot-field">
-              <input type="hidden" name="form-name" value="enquiry">
+            <!-- Posts to the enquiry Cloud Function, served same-origin at
+                 /api/enquiry via a Firebase Hosting rewrite. The function stores
+                 the enquiry in Firestore, emails it on, then redirects here to
+                 /thank-you/. -->
+            <form name="enquiry" method="POST" action="../api/enquiry">
               <p class="d-none" aria-hidden="true">
                 <label>Leave this field empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
               </p>

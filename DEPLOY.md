@@ -121,26 +121,64 @@ rename the reference in the HTML (`theme.css?v=2`) to bust it.
 
 ---
 
-## Still outstanding
+## The enquiry form
 
-1. **The enquiry form does not work yet.** Firebase Hosting is static, so there is no
-   backend to receive the submission. Right now a visitor filling it in gets the
-   thank-you page and **the enquiry is silently lost**. This must be wired up before any
-   outreach goes out. See below.
-2. **Placeholders in the copy** — regulatory disclosure, company number, fee/commission
+**Working.** The form posts to a Cloud Function (`enquiry`, europe-west2), served
+same-origin at `/api/enquiry` via a Hosting rewrite so it satisfies the site's CSP.
+
+Every submission is **written to Firestore first, then emailed**. If the mail transport
+is down or misconfigured the enquiry is still captured and the visitor still sees the
+thank-you page, so a lead can never be silently lost. Submissions live in the
+`enquiries` collection:
+
+https://console.firebase.google.com/project/bp-ads-manager/firestore/data/~2Fenquiries
+
+Firestore rules deny all browser access; only the function can write, using the Admin SDK.
+
+### One step left: turn on the email
+
+The function needs an SMTP credential, stored in Secret Manager as `SMTP_URL`. Until it
+is set, enquiries are captured but not emailed.
+
+**Microsoft 365** (keeps everything in-house; needs SMTP AUTH enabled on the mailbox and
+an app password):
+
+```bash
+printf 'smtp://hello@brightpenny.co.uk:APP_PASSWORD@smtp.office365.com:587' | \
+  gcloud secrets versions add SMTP_URL --project=bp-ads-manager --data-file=-
+```
+
+**SendGrid / Resend** (better deliverability; free tier is plenty):
+
+```bash
+printf 'smtp://apikey:YOUR_API_KEY@smtp.sendgrid.net:587' | \
+  gcloud secrets versions add SMTP_URL --project=bp-ads-manager --data-file=-
+```
+
+Then redeploy the function so it picks up the new version:
+
+```bash
+firebase deploy --only functions --project bp-ads-manager
+```
+
+⚠️ If you use a third party, the SPF record is currently `-all` (strict). You must add
+their include to it or the mail will be rejected. Microsoft 365 needs no SPF change.
+
+### Still outstanding
+
+1. **Placeholders in the copy** — regulatory disclosure, company number, fee/commission
    wording, and the privacy policy body. Search the `site/` folder for `[`.
 3. **GA4** — put the real measurement ID in `site/assets/js/main.js` (`GA_ID`).
 4. **Privacy page is `noindex`** until the policy is finalised; remove that meta tag and
    add the page to `sitemap.xml` when it's signed off.
 
-### Wiring up the form
+### One DNS record still to fix
 
-The intended route is a Cloud Function in the same project (europe-west2) that receives
-the POST, emails `hello@brightpenny.co.uk` and writes a copy to Firestore so no enquiry
-is ever lost. It needs one credential to send mail — either:
+The `www` CNAME did not import — it still points at the apex instead of Firebase. Edit
+that single record in GoDaddy:
 
-- a **Microsoft 365 app password** for the existing mailbox (keeps everything in-house), or
-- a free **SendGrid / Resend API key** (more deliverable, but a third party).
+| Type | Name | Value |
+|---|---|---|
+| CNAME | `www` | `bp-ads-manager.web.app` |
 
-Note: if you send via a third party, the SPF record will need updating, and that record
-is currently `-all` (strict), so mail from an unlisted sender will be rejected.
+The apex (`brightpenny.co.uk`) imported correctly and is already serving.

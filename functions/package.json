@@ -1,0 +1,13 @@
+{
+  "name": "brightpenny-functions",
+  "description": "Enquiry form handler for the Bright Penny site",
+  "type": "module",
+  "engines": { "node": "22" },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.0.2",
+    "firebase-functions": "^6.3.0",
+    "nodemailer": "^6.9.16"
+  },
+  "private": true
+}
