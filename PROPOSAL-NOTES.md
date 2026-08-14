@@ -22,11 +22,12 @@ from you. Cost is yours to price; everything else is below, ready to lift into a
 
 - 6 public pages (Home, Finance options, Sectors, About, Contact, Privacy placeholder)
   plus thank-you and 404 pages, all responsive, mobile-first.
-- Introducer-safe copy throughout: descriptive product information reworded from source
-  material, no advice language, no reproduced PMD claims/statistics/FCA references.
-  All PMD-related wording is flagged inline for their sign-off.
+- Compliance-conscious copy throughout: product information reworded from source
+  material. Bright Penny is presented as a commercial finance broker in its own right;
+  no third-party firm is named anywhere in the public copy. Claim-bearing wording is
+  flagged inline for financial-promotion sign-off.
 - Enquiry form captures name, business, email, phone, finance type, message, and a
-  required consent tick covering both contact and passing details to PMD, with the
+  required consent tick covering contact and sharing with lenders/finance partners, with the
   privacy policy linked.
 - Basic SEO done: per-page titles/descriptions, canonical URLs, Open Graph image,
   sitemap, robots, structured data. Lighthouse targets 90+ across the board.
@@ -35,8 +36,8 @@ from you. Cost is yours to price; everything else is below, ready to lift into a
 
 1. Now: site built and reviewable on a temporary URL.
 2. [X days] Your review: copy tweaks, imagery preferences.
-3. [X days] PMD sign-off round: partner descriptions, disclosure wording, privacy policy
-   (their compliance people will want to see every mention of PMD).
+3. [X days] Compliance sign-off round: regulatory disclosure, fee/commission wording and
+   the privacy policy all need approval by whoever holds the permissions.
 4. [X days] Launch plumbing: domain pointed at Netlify, enquiry inbox confirmed, GA4
    property created, form notification tested end-to-end.
 5. Launch. (Recommend a quiet soft-launch before the next cold-email send.)
@@ -46,13 +47,13 @@ from you. Cost is yours to price; everything else is below, ready to lift into a
 1. **Domain**: the domain name itself + access to its DNS (or delegate to us).
 2. **Enquiry inbox**: the address that should receive form submissions.
 3. **Company details**: registered legal name + company number for the footer.
-4. **PMD sign-off**: introductions to whoever at PMD reviews financial-promotion wording;
+4. **Compliance sign-off**: a route to whoever reviews financial-promotion wording;
    every flagged placeholder needs their approval before launch.
 5. **Privacy policy text**: we supply the structure (already on the site); it needs
-   completing and a legal once-over, since enquiries are shared with PMD.
+   completing and a legal once-over, since enquiry details are shared with lenders.
 6. **Analytics**: a Google account to own the GA4 property (or the nod to use Plausible).
 7. Optional but recommended: a named contact person (and photo if you're comfortable)
-   for the About/Contact pages. An introducer site converts better when it's visibly
+   for the About/Contact pages. A broker site converts better when it's visibly
    run by a person, and it's one more thing that separates it from spam.
 
 ## Open design notes

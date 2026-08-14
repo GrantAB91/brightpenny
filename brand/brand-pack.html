@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>Bright Penny — Brand Pack</title>
+<style>
+  @font-face { font-family:"Cabinet Grotesk"; src:url("../site/assets/fonts/cabinet-grotesk-700.woff2") format("woff2"); font-weight:700; }
+  @font-face { font-family:"Cabinet Grotesk"; src:url("../site/assets/fonts/cabinet-grotesk-800.woff2") format("woff2"); font-weight:800; }
+  @font-face { font-family:"Switzer"; src:url("../site/assets/fonts/switzer-400.woff2") format("woff2"); font-weight:400; }
+  @font-face { font-family:"Switzer"; src:url("../site/assets/fonts/switzer-600.woff2") format("woff2"); font-weight:600; }
+
+  :root{
+    --ink:#0e2038; --navy:#0b1b33; --penny:#f7931e; --penny-deep:#a64d07;
+    --paper:#fcfbf8; --wash:#f4f2ec; --line:#e4e0d6; --muted:#5a6272; --muted-dark:#b9c2d3;
+    --display:"Cabinet Grotesk",Arial,sans-serif; --body:"Switzer",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  @page{ size:A4; margin:0; }
+  html,body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body{ font-family:var(--body); color:var(--ink); background:var(--paper); font-size:10.5pt; line-height:1.55; }
+
+  .page{ width:210mm; height:297mm; padding:18mm 17mm; position:relative; page-break-after:always; overflow:hidden; background:var(--paper); }
+  .page:last-child{ page-break-after:auto; }
+  .page--navy{ background:var(--navy); color:var(--muted-dark); }
+  .page--wash{ background:var(--wash); }
+
+  h1,h2,h3{ font-family:var(--display); font-weight:800; letter-spacing:-.02em; line-height:1.05; color:var(--ink); }
+  .page--navy h1,.page--navy h2,.page--navy h3{ color:#fff; }
+  h2{ font-size:26pt; margin-bottom:3mm; }
+  h3{ font-size:12pt; font-weight:700; letter-spacing:-.01em; margin-bottom:2mm; }
+  p{ margin-bottom:2.5mm; max-width:150mm; }
+  .muted{ color:var(--muted); }
+  .page--navy .muted{ color:var(--muted-dark); }
+
+  .eyebrow{ font-size:7.5pt; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--penny-deep); margin-bottom:3mm; }
+  .page--navy .eyebrow{ color:var(--penny); }
+  .rule{ width:22mm; height:1.1mm; background:var(--penny); margin:0 0 6mm; }
+  .hr{ height:.25mm; background:var(--line); margin:6mm 0; border:0; }
+  .page--navy .hr{ background:rgba(247,147,30,.25); }
+
+  .foot{ position:absolute; left:17mm; right:17mm; bottom:11mm; display:flex; justify-content:space-between;
+         font-size:7.5pt; color:var(--muted); border-top:.25mm solid var(--line); padding-top:2.5mm; }
+  .page--navy .foot{ color:var(--muted-dark); border-top-color:rgba(247,147,30,.25); }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:8mm; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:6mm; }
+
+  /* colour swatches */
+  .sw{ border:.25mm solid var(--line); }
+  .sw__chip{ height:26mm; }
+  .sw__body{ padding:3mm; background:#fff; }
+  .sw__name{ font-family:var(--display); font-weight:700; font-size:10pt; }
+  .sw__hex{ font-family:ui-monospace,Menlo,monospace; font-size:8.5pt; color:var(--muted); }
+  .sw__use{ font-size:8pt; color:var(--muted); margin-top:1.5mm; display:block; }
+
+  table{ width:100%; border-collapse:collapse; font-size:9pt; }
+  th,td{ text-align:left; padding:2.2mm 2mm; border-bottom:.25mm solid var(--line); vertical-align:top; }
+  th{ font-weight:600; font-size:7.5pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); }
+
+  .pass,.fail{ font-weight:600; font-size:8.5pt; }
+  .pass{ color:#1c6b3f; } .fail{ color:#a4262c; }
+
+  .demo{ padding:5mm; border:.25mm solid var(--line); background:#fff; }
+  .btn{ display:inline-block; font-family:var(--body); font-weight:600; font-size:9.5pt;
+        padding:2.6mm 6.5mm; border-radius:999px; border:.4mm solid transparent; }
+  .btn--penny{ background:var(--penny); color:#16233c; border-color:var(--penny); }
+  .btn--ghost{ background:transparent; color:var(--ink); border-color:var(--ink); }
+
+  ul{ list-style:none; }
+  li{ padding:1.8mm 0 1.8mm 6mm; border-bottom:.25mm solid var(--line); position:relative; font-size:9.5pt; }
+  li:before{ content:""; position:absolute; left:0; top:3.4mm; width:2.2mm; height:2.2mm; border-radius:50%; background:var(--penny); }
+  li.no:before{ background:transparent; border:.3mm solid var(--muted); }
+  .page--navy li{ border-bottom-color:rgba(247,147,30,.2); }
+
+  .logo{ width:100%; }
+  .logobox{ border:.25mm solid var(--line); padding:8mm; background:#fff; text-align:center; }
+  .logobox--navy{ background:var(--navy); border-color:rgba(247,147,30,.3); }
+  .cap{ font-size:7.5pt; color:var(--muted); margin-top:2.5mm; }
+
+  .cover-mark{ position:absolute; right:-40mm; bottom:-45mm; width:150mm; opacity:.09; }
+</style>
+</head>
+<body>
+
+<!-- 1. COVER -->
+<section class="page page--navy">
+  <img class="cover-mark" src="../site/assets/icons/favicon.svg" alt="">
+  <img src="../site/assets/img/logo-lockup-white.svg" alt="Bright Penny" style="width:78mm; display:block; margin-bottom:38mm;">
+  <div class="rule"></div>
+  <h1 style="font-size:44pt; color:#fff; margin-bottom:5mm;">Brand pack</h1>
+  <p class="muted" style="font-size:12pt; max-width:120mm;">How to use the Bright Penny identity: logo, colour, type, layout,
+    photography and tone of voice. Everything here matches the website exactly, so anything you make will sit alongside it.</p>
+  <div style="position:absolute; left:17mm; bottom:18mm; font-size:8.5pt; color:var(--muted-dark);">
+    Version 1.0 &nbsp;·&nbsp; August 2026
+  </div>
+</section>
+
+<!-- 2. LOGO -->
+<section class="page">
+  <p class="eyebrow">01 — Logo</p>
+  <div class="rule"></div>
+  <h2>The lockup</h2>
+  <p class="muted">Two versions cover almost everything. Use the full-colour lockup on light backgrounds and the reversed
+    lockup on navy or on photography. Never retype the wordmark; always use the supplied files.</p>
+
+  <div class="grid2" style="margin-top:7mm;">
+    <div>
+      <div class="logobox"><img class="logo" src="../site/assets/img/logo-lockup.svg" alt=""></div>
+      <p class="cap"><strong>Full colour</strong> — on paper white or any light, low-detail background.</p>
+    </div>
+    <div>
+      <div class="logobox logobox--navy"><img class="logo" src="../site/assets/img/logo-lockup-white.svg" alt=""></div>
+      <p class="cap"><strong>Reversed</strong> — on navy, or over a darkened photograph.</p>
+    </div>
+  </div>
+
+  <hr class="hr">
+  <div class="grid2">
+    <div>
+      <h3>Clear space</h3>
+      <p class="muted">Keep clear space around the lockup equal to the height of the coin mark on all four sides. Nothing
+        (type, edges, other logos) comes inside it.</p>
+      <h3 style="margin-top:5mm;">Minimum size</h3>
+      <p class="muted">Do not reproduce the lockup below <strong>32&nbsp;mm</strong> wide in print, or
+        <strong>120&nbsp;px</strong> wide on screen. Below that the strapline stops being legible; use the coin mark alone instead.</p>
+    </div>
+    <div>
+      <h3>The coin mark</h3>
+      <p class="muted">The £ coin works on its own where the full lockup won't fit: social avatars, favicons, app icons,
+        stamps on photography.</p>
+      <div style="display:flex; gap:5mm; align-items:center; margin-top:3mm;">
+        <img src="../site/assets/icons/favicon.svg" alt="" style="width:22mm;">
+        <img src="../site/assets/icons/favicon.svg" alt="" style="width:13mm;">
+        <img src="../site/assets/icons/favicon.svg" alt="" style="width:8mm;">
+      </div>
+    </div>
+  </div>
+
+  <hr class="hr">
+  <h3>Don't</h3>
+  <ul>
+    <li class="no">Recolour it. The grey and orange are fixed; the only alternative is the all-white reversed version.</li>
+    <li class="no">Stretch, squash, rotate or add effects (shadows, outlines, gradients).</li>
+    <li class="no">Place the full-colour lockup on a busy photograph or a mid-tone background.</li>
+    <li class="no">Rebuild the wordmark in another typeface.</li>
+  </ul>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>01 — Logo</span></div>
+</section>
+
+<!-- 3. COLOUR -->
+<section class="page">
+  <p class="eyebrow">02 — Colour</p>
+  <div class="rule"></div>
+  <h2>Palette</h2>
+  <p class="muted">Deep navy carries the structure, warm paper white gives the space, and one penny orange does all the
+    highlighting. Restraint is the point: orange should feel like a marker pen, not a background.</p>
+
+  <div class="grid3" style="margin-top:7mm;">
+    <div class="sw"><div class="sw__chip" style="background:#0e2038;"></div><div class="sw__body">
+      <span class="sw__name">Ink</span><br><span class="sw__hex">#0E2038 · rgb(14,32,56)</span>
+      <span class="sw__use">Body text and headings on light backgrounds.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#0b1b33;"></div><div class="sw__body">
+      <span class="sw__name">Navy</span><br><span class="sw__hex">#0B1B33 · rgb(11,27,51)</span>
+      <span class="sw__use">Dark bands, footers, full-bleed panels.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#f7931e;"></div><div class="sw__body">
+      <span class="sw__name">Penny</span><br><span class="sw__hex">#F7931E · rgb(247,147,30)</span>
+      <span class="sw__use">The accent. Buttons, rules, markers. See contrast rules overleaf.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#a64d07;"></div><div class="sw__body">
+      <span class="sw__name">Penny deep</span><br><span class="sw__hex">#A64D07 · rgb(166,77,7)</span>
+      <span class="sw__use">Orange <em>text</em> on light backgrounds. Never use #F7931E for this.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#fcfbf8; border-bottom:.25mm solid var(--line);"></div><div class="sw__body">
+      <span class="sw__name">Paper</span><br><span class="sw__hex">#FCFBF8 · rgb(252,251,248)</span>
+      <span class="sw__use">Default background. Warmer than pure white.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#f4f2ec;"></div><div class="sw__body">
+      <span class="sw__name">Wash</span><br><span class="sw__hex">#F4F2EC · rgb(244,242,236)</span>
+      <span class="sw__use">Alternate band to separate sections.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#e4e0d6;"></div><div class="sw__body">
+      <span class="sw__name">Hairline</span><br><span class="sw__hex">#E4E0D6 · rgb(228,224,214)</span>
+      <span class="sw__use">1px rules and dividers.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#5a6272;"></div><div class="sw__body">
+      <span class="sw__name">Muted</span><br><span class="sw__hex">#5A6272 · rgb(90,98,114)</span>
+      <span class="sw__use">Secondary text on light.</span></div></div>
+    <div class="sw"><div class="sw__chip" style="background:#b9c2d3;"></div><div class="sw__body">
+      <span class="sw__name">Muted light</span><br><span class="sw__hex">#B9C2D3 · rgb(185,194,211)</span>
+      <span class="sw__use">Secondary text on navy.</span></div></div>
+  </div>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>02 — Colour</span></div>
+</section>
+
+<!-- 4. CONTRAST -->
+<section class="page page--wash">
+  <p class="eyebrow">02 — Colour</p>
+  <div class="rule"></div>
+  <h2>The one orange rule</h2>
+  <p class="muted">This is the single most common way to get the brand wrong, so it's worth reading twice.
+    <strong>Penny orange is not a text colour on white.</strong> It measures 2.3:1 against white, which fails accessibility
+    standards at every size. It looks fine on a big screen in a bright room and becomes unreadable everywhere else.</p>
+
+  <table style="margin-top:6mm;">
+    <tr><th>Combination</th><th>Ratio</th><th>Verdict</th><th>Use for</th></tr>
+    <tr><td>#F7931E on #FFFFFF</td><td>2.3:1</td><td class="fail">Fails</td><td>Never for text. Shapes and rules only.</td></tr>
+    <tr><td>#A64D07 on #FCFBF8</td><td>5.1:1</td><td class="pass">Passes AA</td><td>Orange text, links and small headings on light.</td></tr>
+    <tr><td>#16233C on #F7931E</td><td>6.7:1</td><td class="pass">Passes AA</td><td>Buttons: dark text on an orange fill.</td></tr>
+    <tr><td>#FFFFFF on #F7931E</td><td>2.3:1</td><td class="fail">Fails</td><td>Never. White on orange is unreadable.</td></tr>
+    <tr><td>#F7931E on #0B1B33</td><td>6.7:1</td><td class="pass">Passes AA</td><td>Orange text and accents on navy.</td></tr>
+    <tr><td>#0E2038 on #FCFBF8</td><td>15.3:1</td><td class="pass">Passes AAA</td><td>Body copy and headings.</td></tr>
+  </table>
+
+  <hr class="hr">
+  <div class="grid2">
+    <div class="demo">
+      <p class="eyebrow" style="margin-bottom:2mm;">Do</p>
+      <p style="font-family:var(--display); font-weight:800; font-size:15pt; margin-bottom:3mm;">Finance for your next van.</p>
+      <p style="color:#a64d07; font-weight:600; margin-bottom:4mm;">Orange text in penny deep.</p>
+      <span class="btn btn--penny">Make an enquiry</span>
+    </div>
+    <div class="demo">
+      <p class="eyebrow" style="margin-bottom:2mm;">Don't</p>
+      <p style="font-family:var(--display); font-weight:800; font-size:15pt; color:#f7931e; margin-bottom:3mm;">Finance for your next van.</p>
+      <p style="color:#f7931e; font-weight:600; margin-bottom:4mm;">Orange text in penny on white.</p>
+      <span class="btn" style="background:#f7931e; color:#fff; border-color:#f7931e;">Make an enquiry</span>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:4mm; font-size:9pt;">Rule of thumb for social graphics: if orange is touching a letterform on a
+    light background, change it to <strong>#A64D07</strong>. If orange is a block, a rule or a shape, leave it as
+    <strong>#F7931E</strong>.</p>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>02 — Colour</span></div>
+</section>
+
+<!-- 5. TYPE -->
+<section class="page">
+  <p class="eyebrow">03 — Typography</p>
+  <div class="rule"></div>
+  <h2>Two typefaces</h2>
+  <p class="muted">Both are free for commercial use from Fontshare (Indian Type Foundry) and can be downloaded and installed
+    on your machine for use in Canva, Figma, Word or anywhere else.</p>
+
+  <div class="grid2" style="margin-top:6mm;">
+    <div>
+      <p style="font-family:var(--display); font-weight:800; font-size:34pt; line-height:1; letter-spacing:-.03em;">Aa</p>
+      <h3 style="margin-top:3mm;">Cabinet Grotesk</h3>
+      <p class="muted" style="font-size:9pt;">Headlines and anything big. Weights 700 (Bold) and 800 (Extrabold) only.
+        Never use it for body copy.</p>
+      <p class="sw__hex" style="margin-top:2mm;">fontshare.com/fonts/cabinet-grotesk</p>
+    </div>
+    <div>
+      <p style="font-family:var(--body); font-weight:600; font-size:34pt; line-height:1;">Aa</p>
+      <h3 style="margin-top:3mm;">Switzer</h3>
+      <p class="muted" style="font-size:9pt;">Body copy, labels, buttons, captions. Weights 400 (Regular) and 600 (Semibold) only.</p>
+      <p class="sw__hex" style="margin-top:2mm;">fontshare.com/fonts/switzer</p>
+    </div>
+  </div>
+
+  <hr class="hr">
+  <h3>Hierarchy comes from size, not weight</h3>
+  <p class="muted">The brand uses only two weights per face. Don't reach for a heavier weight to make something stand out;
+    make it bigger, or give it more space around it. Large display type is tracked slightly tight; body copy is not.</p>
+
+  <table style="margin-top:4mm;">
+    <tr><th>Role</th><th>Face</th><th>Weight</th><th>Tracking</th><th>Example size</th></tr>
+    <tr><td>Hero headline</td><td>Cabinet Grotesk</td><td>800</td><td>-0.028em</td><td>43–77pt</td></tr>
+    <tr><td>Section heading</td><td>Cabinet Grotesk</td><td>700</td><td>-0.022em</td><td>30–49pt</td></tr>
+    <tr><td>Sub-heading</td><td>Cabinet Grotesk</td><td>700</td><td>-0.012em</td><td>21–26pt</td></tr>
+    <tr><td>Lede / intro</td><td>Switzer</td><td>400</td><td>normal</td><td>18–22pt</td></tr>
+    <tr><td>Body</td><td>Switzer</td><td>400</td><td>normal</td><td>17pt / 1.6 line height</td></tr>
+    <tr><td>Eyebrow label</td><td>Switzer</td><td>600</td><td>+0.15em, uppercase</td><td>12–13pt</td></tr>
+  </table>
+
+  <hr class="hr">
+  <div class="demo">
+    <p class="eyebrow" style="margin-bottom:2mm;">Eyebrow label</p>
+    <p style="font-family:var(--display); font-weight:800; font-size:24pt; letter-spacing:-.028em; line-height:1.05; margin-bottom:3mm;">The short route to business finance.</p>
+    <p class="muted" style="max-width:130mm;">Tell us what you're funding and we'll do the legwork. New kit, working capital,
+      premises: we look at what's available and arrange the facility that fits.</p>
+  </div>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>03 — Typography</span></div>
+</section>
+
+<!-- 6. LAYOUT -->
+<section class="page page--wash">
+  <p class="eyebrow">04 — Layout &amp; UI</p>
+  <div class="rule"></div>
+  <h2>Ruled, not boxed</h2>
+  <p class="muted">The layout language is a ledger: thin hairlines organising content, plenty of white space, and square
+    corners. Avoid drop shadows, rounded cards and glows — they pull the brand towards generic template territory.</p>
+
+  <div class="grid2" style="margin-top:6mm;">
+    <div>
+      <h3>Corners</h3>
+      <ul>
+        <li>Panels, images and dividers: <strong>square</strong>, 0 radius.</li>
+        <li>Buttons: <strong>fully rounded pill</strong> (999px).</li>
+        <li>Form fields: square, 1px hairline border.</li>
+      </ul>
+      <h3 style="margin-top:5mm;">Spacing rhythm</h3>
+      <p class="muted" style="font-size:9pt;">Three tiers, never one uniform gap. Tight for closely related blocks,
+        standard between sections, and a statement gap around anything that should land on its own.</p>
+    </div>
+    <div>
+      <h3>Buttons</h3>
+      <div class="demo" style="background:#fff;">
+        <span class="btn btn--penny" style="margin-right:4mm;">Make an enquiry</span>
+        <span class="btn btn--ghost">See finance options</span>
+        <p class="cap" style="margin-top:4mm;">Primary: penny fill, ink text. Secondary: hairline outline, fills on hover.
+          Generous horizontal padding — never let text crowd the edge.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="hr">
+  <h3>Applying this to a social post</h3>
+  <ul>
+    <li>Navy background, reversed logo top-left, one big Cabinet Grotesk line, plenty of empty space.</li>
+    <li>One short penny-orange rule above the headline as the only decoration.</li>
+    <li>If you put type over a photo, darken the photo with a navy overlay first so the text stays readable.</li>
+    <li class="no">Don't fill the frame. If it feels a bit empty, it's probably right.</li>
+    <li class="no">Don't add a second accent colour, gradients, or emoji.</li>
+  </ul>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>04 — Layout &amp; UI</span></div>
+</section>
+
+<!-- 7. PHOTOGRAPHY -->
+<section class="page">
+  <p class="eyebrow">05 — Photography</p>
+  <div class="rule"></div>
+  <h2>Show what the money buys</h2>
+  <p class="muted">Pictures earn their place by showing the thing being financed: a van, a machine, racking full of stock,
+    premises, a shop counter. Real British working businesses in good daylight. Avoid anything that could be anywhere.</p>
+
+  <div class="grid3" style="margin-top:6mm;">
+    <div><img src="../site/assets/img/product-asset-finance-800.jpg" style="width:100%; display:block;" alt=""><p class="cap">Assets: vans, plant, machinery.</p></div>
+    <div><img src="../site/assets/img/product-business-loans-800.jpg" style="width:100%; display:block;" alt=""><p class="cap">Premises and high streets.</p></div>
+    <div><img src="../site/assets/img/product-invoice-finance-800.jpg" style="width:100%; display:block;" alt=""><p class="cap">Stock, racking, operations.</p></div>
+  </div>
+
+  <hr class="hr">
+  <div class="grid2">
+    <div>
+      <h3>Look for</h3>
+      <ul>
+        <li>Bright, natural daylight and plenty of room around the subject</li>
+        <li>UK-plausible detail: British plates, brick, hedgerows, high streets</li>
+        <li>Real work in progress rather than posed models</li>
+        <li>Clean, uncluttered compositions</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Reject</h3>
+      <ul>
+        <li class="no">Any foreign signage or language in shot, however small</li>
+        <li class="no">Left-hand-drive vehicles and non-UK number plates</li>
+        <li class="no">Dark, oily, cluttered interiors</li>
+        <li class="no">Handshakes, suits round a laptop, boardrooms</li>
+        <li class="no">Coins, piggy banks, calculators, stock charts</li>
+      </ul>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:4mm; font-size:9pt;"><strong>Always open a picture at full size before you use it.</strong>
+    Thumbnails hide the giveaways. Several otherwise-good shots were rejected for the site only once enlarged, revealing
+    foreign-language signage or an American road sign in the background.</p>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>05 — Photography</span></div>
+</section>
+
+<!-- 8. TONE -->
+<section class="page page--navy">
+  <p class="eyebrow">06 — Tone of voice</p>
+  <div class="rule"></div>
+  <h2 style="color:#fff;">Say it like you'd say it</h2>
+  <p class="muted">Plain UK English, short sentences, first person plural. The reader is a business owner with a job to do.
+    Write the way you'd talk to them across a yard, not the way a bank writes a letter.</p>
+
+  <hr class="hr">
+  <div class="grid2">
+    <div>
+      <h3 style="color:#fff;">Do</h3>
+      <ul>
+        <li>Be concrete: "a van, a machine, a cash-flow gap"</li>
+        <li>Vary sentence length. Short ones land.</li>
+        <li>Say what something costs and what happens next</li>
+        <li>Admit limits: "if there isn't a sensible option, we'll say so"</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="color:#fff;">Don't</h3>
+      <ul>
+        <li class="no">"Unlock", "seamless", "elevate", "empower", "bespoke solutions"</li>
+        <li class="no">"In today's fast-paced business landscape…"</li>
+        <li class="no">"It's not just finance, it's a partnership"</li>
+        <li class="no">Exclamation marks, emoji, or three adjectives in a row</li>
+        <li class="no">Promising rates, speed or approval you can't guarantee</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="hr">
+  <div style="border:.3mm dashed rgba(247,147,30,.5); padding:5mm;">
+    <h3 style="color:#fff;">Before anything goes out</h3>
+    <p class="muted" style="margin-bottom:0;">Anything that promotes finance is a financial promotion and needs sign-off before
+      publication, including social posts and outbound email. Don't quote rates, don't promise timescales, and don't imply a
+      decision is guaranteed. When in doubt, describe what you do and invite a conversation.</p>
+  </div>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>06 — Tone of voice</span></div>
+</section>
+
+<!-- 9. QUICK REFERENCE -->
+<section class="page">
+  <p class="eyebrow">Quick reference</p>
+  <div class="rule"></div>
+  <h2>The one-page version</h2>
+
+  <table style="margin-top:5mm;">
+    <tr><th colspan="2">Colour</th></tr>
+    <tr><td>Text on light</td><td>#0E2038 &nbsp; (secondary #5A6272)</td></tr>
+    <tr><td>Dark backgrounds</td><td>#0B1B33 &nbsp; (secondary text #B9C2D3)</td></tr>
+    <tr><td>Accent shapes, rules, button fills</td><td>#F7931E</td></tr>
+    <tr><td>Accent <em>text</em> on light</td><td>#A64D07</td></tr>
+    <tr><td>Background</td><td>#FCFBF8 &nbsp; (alt band #F4F2EC, hairlines #E4E0D6)</td></tr>
+  </table>
+
+  <table style="margin-top:6mm;">
+    <tr><th colspan="2">Type</th></tr>
+    <tr><td>Headlines</td><td>Cabinet Grotesk Bold / Extrabold, tracking tight</td></tr>
+    <tr><td>Everything else</td><td>Switzer Regular / Semibold</td></tr>
+    <tr><td>Labels</td><td>Switzer Semibold, uppercase, +0.15em tracking</td></tr>
+    <tr><td>Download</td><td>fontshare.com — free for commercial use</td></tr>
+  </table>
+
+  <table style="margin-top:6mm;">
+    <tr><th colspan="2">Shapes</th></tr>
+    <tr><td>Panels and images</td><td>Square corners, 1px hairline</td></tr>
+    <tr><td>Buttons</td><td>Pill, generous side padding, dark text on orange</td></tr>
+    <tr><td>Decoration</td><td>Thin rules only. No shadows, gradients or glows.</td></tr>
+  </table>
+
+  <hr class="hr">
+  <p class="muted" style="font-size:9pt;">Files for all of the above live with the website project: logo SVGs in
+    <span class="sw__hex">site/assets/img/</span>, fonts in <span class="sw__hex">site/assets/fonts/</span>, and the full
+    set of colour and type values in <span class="sw__hex">site/assets/css/theme.css</span>.</p>
+
+  <div style="margin-top:14mm; border-top:.5mm solid var(--penny); padding-top:5mm;">
+    <img src="../site/assets/img/logo-lockup.svg" alt="Bright Penny" style="width:52mm; display:block;">
+  </div>
+  <div class="foot"><span>Bright Penny — Brand pack</span><span>Version 1.0 · August 2026</span></div>
+</section>
+
+</body>
+</html>
