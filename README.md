@@ -10,7 +10,7 @@ site/                     <- deploy THIS folder
   index.html              Home
   finance-options/        Finance options (9 products, jump nav)
   sectors/                Sector grid
-  about/                  Introducer model + PMD partnership
+  about/                  How we work + what to expect
   contact/                Enquiry form (Netlify Forms)
   privacy/                PLACEHOLDER policy (noindex until finalised)
   thank-you/              Form success page (noindex)
@@ -19,7 +19,6 @@ site/                     <- deploy THIS folder
   assets/js/              bootstrap.bundle.min.js (untouched) + main.js (cookie banner + analytics)
   assets/fonts/           Cabinet Grotesk + Switzer (Fontshare, free for commercial use)
   assets/img/             photos (AVIF/WebP/JPG at multiple sizes), logo SVGs, og-image
-  assets/video/           hero-a1.mp4 (14s, 720p, muted, ~1MB)
   netlify.toml            headers, caching, CSP
   robots.txt, sitemap.xml
 ```
@@ -40,22 +39,13 @@ Source photos and the tooling that produced the derived assets live one level up
   `theme.css` or `main.js` after launch, rename the reference in all pages from
   `theme.css` to `theme.css?v=2` (and bump the number each time).
 
-## The hero video
+## The hero
 
-The home page hero uses a short looping clip of the A1 in Yorkshire.
-
-- It is **not** in the HTML. `main.js` injects the `<video>` only when the viewport
-  is 768px or wider and the visitor has not asked for reduced motion. This is
-  deliberate: an autoplaying video is downloaded by the browser even when it is
-  `display:none` with `preload="none"`, which was costing phones ~1.2MB for
-  something they never saw. Home is 299KB on mobile with this approach.
-- Phones and reduced-motion visitors get the poster image instead.
-- There is a "Pause background video" control in the top right (WCAG 2.2.2 — any
-  motion that autoplays for more than five seconds needs a way to stop it). Don't
-  remove it.
-- To swap the clip: replace `assets/video/hero-a1.mp4`, regenerate a poster frame,
-  and update the `data-video` / `data-poster` attributes on `#hero-media` in
-  `index.html`.
+The home page hero is asset-led: a still photograph of a panel van against a brick
+frontage, with the copy over a navy scrim on the left. On screens under 992px the
+photo stacks above the copy so the page never opens on a block of text. There is no
+video. To swap the image, replace `assets/img/hero-van-*` (desktop 16:9, mobile
+`-m-` 16:10) and update the `<picture>` inside `.hero-asset__media` in `index.html`.
 
 ## Imagery rules
 
@@ -78,14 +68,14 @@ Search the whole folder for `[` to find them all. In short:
 1. Domain: replace `https://brightpenny.co.uk` in every canonical/og:url, `sitemap.xml`,
    `robots.txt` and the JSON-LD block on the home page.
 2. Enquiry inbox: replace `enquiries@brightpenny.co.uk` (footer, contact page, privacy, JSON-LD).
-3. Footer disclosure box + partner descriptions: wording to be agreed with PMD.
+3. Footer disclosure box: regulatory/permissions wording to be confirmed before launch.
 4. Company legal name + number in the footer bottom line.
 5. Privacy policy: full text + legal review, then remove its
    `<meta name="robots" content="noindex, follow">` and add
    `<url><loc>…/privacy/</loc></url>` to `sitemap.xml`.
 6. Analytics: put the real GA4 measurement ID in `assets/js/main.js` (`GA_ID` at the top).
    Nothing loads until it's set AND a visitor accepts the banner.
-7. All copy that mentions PMD: get PMD sign-off (financial-promotion review) before launch.
+7. All claim-bearing copy: get financial-promotion sign-off before launch from whoever holds the permissions Bright Penny trades under.
 
 ## Deploying to Netlify (recommended)
 

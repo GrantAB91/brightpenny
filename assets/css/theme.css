@@ -650,7 +650,7 @@ a:focus-visible, .btn:focus-visible, button:focus-visible {
 }
 
 /* ---------- flow / steps: one continuous rule, numerals on the line ----------
-   Used for the About introducer diagram and the Contact "what happens next".
+   Used for the About "how we work" steps and the Contact "what happens next".
    No boxes: a single vertical hairline with markers sitting on it. */
 .flow {
   position: relative;
